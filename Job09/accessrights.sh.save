@@ -1,0 +1,12 @@
+while IFS=',' read -r uid prenom nom mot_de_passe gui; do
+
+    if [ "$uid" != "uid" ]; then
+            if id "$uid" &>/dev/null; then
+      	      usermod -c "$prenom $nom" -g "$gui" "$uid"
+            echo "Mise à jour de l'utilisateur $uid avec le GUI $gui"
+        else
+           useradd -m -c "$prenom $nom" -g "$gui" -s /bin/bash "$uid"
+            echo "Utilisateur $uid créé avec le GUI $gui"
+        fi
+    fi
+done < userlist.csv
