@@ -15,7 +15,7 @@
             fi
         else
             pass_crypte=$(mkpasswd -m sha-512 "$mdp")
-            sudo useradd --badnames -m "$prenom" -G users -c "$prenom $nom" -p "$pass_crypte"
+            sudo useradd --badname -m "$prenom" -G users -c "$prenom $nom" -p "$pass_crypte"
 
             if [ "$role" == "Admin" ]; then
                 sudo usermod -aG sudo "$prenom"
